@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Student index
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<h1 class="mb-4">Student Index</h1>
+
+		<table class="table table-bordered">
+			<thead class="thead-dark">
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Adresse</th>
+					<th>Classroom</th>
+					<th>Courses</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for student in students %}
+					<tr>
+						<td>{{ student.id }}</td>
+						<td>{{ student.name }}</td>
+						<td>
+							{{ student.classroom.name }}
+						</td>
+						<td>
+							{% for course in student.courses %}
+								{{ course.coursename }}
+							{% endfor %}
+						</td>
+						<td>
+							<a href="{{ path('app_student_show', {'id': student.id}) }}" class="btn btn-info btn-sm">Show</a>
+							<a href="{{ path('app_student_edit', {'id': student.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+						</td>
+					</tr>
+				</tbody>
+			</tbody>
+		</tr>
+	{% else %}
+		<tr>
+			<td colspan="3">No records found</td>
+		</tr>
+	{% endfor %}
+</tbody></table><a href="{{ path('app_student_new') }}" class="btn btn-success">Create New</a></div>{% endblock %}
